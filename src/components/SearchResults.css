@@ -1,4 +1,6 @@
-
+.search-container{
+  margin: 0;
+}
 .search-results-container {
   padding: 20px 48px;
   margin-top: 16px;

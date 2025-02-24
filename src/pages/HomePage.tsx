@@ -97,9 +97,9 @@ const HomePage = () => {
     return (
         <div>
             <Navbar onSearch={handleSearch} />
-            {!searchState && (
+            {/* {!searchState && (
                 <HomeList />
-            )}
+            )} */}
             {searchState && (
                 <SearchResults
                     movies={movies}

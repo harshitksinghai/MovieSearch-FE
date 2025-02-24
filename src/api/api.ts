@@ -1,7 +1,11 @@
 import axios from "axios";
+import {useTranslation} from 'react-i18next';
+
 
 const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 const API_URL = import.meta.env.VITE_OMDB_API_URL;
+
+
 
 const POPULAR_MOVIES = [
     "Avatar", "Inception", "Interstellar", "The Dark Knight",
@@ -14,6 +18,7 @@ const POPULAR_SERIES = [
 ];
 
 export const fetchMovies = async (query?: string, year?: string, type?: string, page: number = 1) => {
+    const {t} = useTranslation();
     console.log('Fetching with params:', { query, year, type, page });
 
     if (query) {
@@ -37,7 +42,7 @@ export const fetchMovies = async (query?: string, year?: string, type?: string, 
             return { 
                 movies: [], 
                 totalPages: 1, 
-                error: response.data.Error || "No results found" 
+                error: response.data.Error || "{t('error.NoMoviesFound')} "
             };
         } catch (error: any) {
             console.error('API Error:', error);
@@ -82,3 +87,33 @@ export const fetchMovies = async (query?: string, year?: string, type?: string, 
         }
     }
 };
+
+export const fetchMoviesByImdbId = async (imdbId: string) => {
+    if(imdbId){
+        try {
+            let url: string = `${API_URL}?apikey=${API_KEY}&i=${encodeURIComponent(imdbId)}&plot=full`;
+
+            console.log('Request URL:', url);
+            const response = await axios.get(url);
+            console.log('API Response:', response);
+
+            if (response.data.Response === "True") {
+                return {
+                    movie: response.data,
+                    error: null
+                };
+            }
+            
+            return { 
+                movie: null, 
+                error: response.data.Error || "No results found" 
+            };
+        } catch (error: any) {
+            console.error('API Error:', error);
+            return { 
+                movie: null, 
+                error: error.message || "Failed to fetch movies" 
+            };
+        }
+    }
+}

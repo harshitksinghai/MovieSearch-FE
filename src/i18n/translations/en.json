@@ -1,0 +1,24 @@
+{
+    "navbar":{
+        "appName": "WikiMovies",
+        "searchPlaceholder": "Search Title...",
+        "typeAll": "All",
+        "typeMovies": "Movies",
+        "typeSeries": "Series",
+        "typeGames": "Games",
+        "Year": "Year"
+    },
+    "error":{
+        "titleError": "Title must be at least 3 characters long.",
+        "NoMoviesFound": "No results found!",
+        "fetchFailed": "Failed to fetch movies!"
+    },
+    "card":{
+        "dislikeTooltip": "Not for me",
+        "likeTooptip": "I like this",
+        "loveTooltip": "Love this!",
+        "addListTooltip": "Add to My List",
+        "removeListTooltip": "Remove from My List"
+    }
+
+}

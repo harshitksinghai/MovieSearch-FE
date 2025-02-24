@@ -1,21 +1,43 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './MovieCard.css';
 import placeholder from "../assets/placeholder1.jpg";
 import { FaRegThumbsUp, FaThumbsUp, FaRegThumbsDown, FaThumbsDown, FaRegHeart, FaHeart, FaPlus, FaCheck } from "react-icons/fa6";
+import { removeFromList, addToList, updateRating, getMovieList } from '../utils/storage';
+import { useTranslation } from 'react-i18next'
 
 interface MovieCardProps {
   movie: any;
 }
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
+  const {t} = useTranslation();
   const [ratingState, setRatingState] = useState<'none' | 'dislike' | 'like' | 'love'>('none');
   const [isAddedToList, setIsAddedToList] = useState(false);
 
+  useEffect(() => {
+    const movieList = getMovieList();
+    const storedMovie = movieList.find((m) => m.imdbID === movie.imdbID);
+    if (storedMovie) {
+      setIsAddedToList(true);
+      setRatingState(storedMovie.ratingState);
+    }
+  }, [movie.imdbID]);
+
   const handleRating = (rating: 'dislike' | 'like' | 'love') => {
     setRatingState(rating === ratingState ? 'none' : rating);
+    const newRating = rating === ratingState ? 'none' : rating;
+    setRatingState(newRating);
+    if (isAddedToList) {
+      updateRating(movie.imdbID, newRating);
+    }
   };
 
   const handleAddToList = () => {
+    if (isAddedToList) {
+      removeFromList(movie.imdbID);
+    } else {
+      addToList(movie.imdbID);
+    }
     setIsAddedToList(!isAddedToList);
   };
 
@@ -54,7 +76,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               <FaThumbsDown size={14} /> : 
               <FaRegThumbsDown size={14} color="white" />
             }
-              <span className="tooltip">Not for me</span>
+              <span className="tooltip">{t('card.dislikeTooptip')}</span>
             </button>
             <button
             className={`action-button ${ratingState === 'like' ? 'active' : ''}`}
@@ -64,7 +86,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               <FaThumbsUp size={14} /> : 
               <FaRegThumbsUp size={14} color="white" />
             }
-            <span className="tooltip">I like this</span>
+            <span className="tooltip">{t('card.likeTooptip')}</span>
           </button>
             <button
               className={`action-button ${ratingState === 'love' ? 'active' : ''}`}
@@ -74,7 +96,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               <FaHeart size={14} /> : 
               <FaRegHeart size={14} color="white" />
             }
-              <span className="tooltip">Love this!</span>
+              <span className="tooltip">{t('card.loveTooptip')}</span>
             </button>
           </div>
         </div>
@@ -87,7 +109,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             <FaCheck size={14} /> : 
             <FaPlus size={14} color="white" />
           }
-          <span className="tooltip">{isAddedToList ? 'Remove from My List' : 'Add to My List'}</span>
+          <span className="tooltip">{isAddedToList ? {t('card.removeListTooltip')} : {t('card.addListTooltip')}}</span>
         </button>
 
         <div className="movie-info">

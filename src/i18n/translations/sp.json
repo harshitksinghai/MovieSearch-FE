@@ -1,0 +1,16 @@
+{
+    "navbar":{
+        "appName": "WikiMovies",
+        "searchPlaceholder": "Search Title...",
+        "typeAll": "All",
+        "typeMovies": "Movies",
+        "typeSeries": "Series",
+        "typeGames": "Games",
+        "Year": "Year"
+    },
+    "error":{
+        "titleError": "Title must be at least 3 characters long.",
+        "NoMoviesFound": "No results found!",
+        "fetchFailed": "Failed to fetch movies!"
+    }
+}

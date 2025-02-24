@@ -1,12 +1,15 @@
 // SearchBar.tsx
 import React, { useState } from 'react';
 import './SearchBar.css';
+import { useTranslation } from 'react-i18next'
+
 
 interface SearchBarProps {
-    onSearch: (title: string, type: string, year: string) => void;
+    onSearch: (title: string, year: string, type: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+    const {t} = useTranslation()
     const [title, setTitle] = useState('');
     const [type, setType] = useState('');
     const [year, setYear] = useState('');
@@ -21,12 +24,27 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
     const handleSearch = () => {
         if (title.trim().length < 3) {
-            setError('Title must be at least 3 characters long.');
+            setError({t('error.titleError')});
             return;
         }
         setError('');
-        onSearch(title, type, year);
+        onSearch(title, year, type);
     };
+
+    let typeOption: string;
+    if(type === 'movie'){
+        typeOption = 'Movies';
+    }
+    else if(type === 'series'){
+        typeOption = 'Series';
+    }
+    else if(type === 'game'){
+        typeOption = 'Games';
+    }
+    else{
+        typeOption = "All"
+    }
+
 
     return (
         <div>
@@ -48,7 +66,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                                 onBlur={() => setIsTypeOpen(false)}
                                 className="select-button"
                             >
-                                {type ? type : "All"}
+                                {typeOption}
                                 <span className={`arrow ${isTypeOpen ? 'arrow-up' : ''}`}>
                                     ▼
                                 </span>
@@ -56,12 +74,23 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
                             {isTypeOpen && (
                                 <div className="dropdown-menu">
-                                    {['All', 'Movies', 'Series'].map((option) => (
+                                    {['All', 'Movies', 'Series', 'Games'].map((option) => (
                                         <button
                                             key={option}
                                             className="dropdown-item"
                                             onMouseDown={() => {
-                                                setType(option);
+                                                if(option === 'Movies'){
+                                                    setType('movie');
+                                                }
+                                                else if(option === 'Series'){
+                                                    setType('series')
+                                                }
+                                                else if(option === 'Games'){
+                                                    setType('game')
+                                                }
+                                                else{
+                                                    setType('')
+                                                }
                                                 setIsTypeOpen(false);
                                             }}
                                         >
