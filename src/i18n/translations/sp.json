@@ -1,16 +1,31 @@
 {
-    "navbar":{
+    "navbar": {
         "appName": "WikiMovies",
-        "searchPlaceholder": "Search Title...",
-        "typeAll": "All",
-        "typeMovies": "Movies",
+        "searchPlaceholder": "Buscar título...",
+        "typeAll": "Todo",
+        "typeMovies": "Películas",
         "typeSeries": "Series",
-        "typeGames": "Games",
-        "Year": "Year"
+        "typeGames": "Juegos",
+        "Year": "Año",
+        "none": "Ninguno"
     },
-    "error":{
-        "titleError": "Title must be at least 3 characters long.",
-        "NoMoviesFound": "No results found!",
-        "fetchFailed": "Failed to fetch movies!"
+    "error": {
+        "titleError": "El título debe tener al menos 3 caracteres.",
+        "NoMoviesFound": "¡No se encontraron resultados!",
+        "fetchFailed": "No se pudieron cargar las películas. Inténtalo de nuevo más tarde.",
+        "fillSearch": "Introduce un título, año o tipo para buscar",
+        "somethingWentWrong": "Algo salió mal"
+    },
+    "card": {
+        "dislikeTooltip": "No me interesa",
+        "likeTooltip": "Me gusta",
+        "loveTooltip": "¡Me encanta!",
+        "addListTooltip": "Agregar a Mi Lista",
+        "removeListTooltip": "Eliminar de Mi Lista"
+    },
+    "fav": {
+        "myList": "MI LISTA",
+        "loading": "Cargando tus favoritos...",
+        "empty": "No hay elementos en tu lista."
     }
 }

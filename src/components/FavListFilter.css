@@ -1,106 +1,54 @@
 .fav-list-filter-container{
-    background-color: bisque;
-    margin: 50px 50px 0 50px;
-    display: flex;
-    justify-content: space-between;
+  background-color: blanchedalmond;
+  position: relative;
+  top: 0px;
+
 }
-.left-filter{
-    display: flex;
-    gap: 2px;
-}
-.right-filter{
-    display: flex;
-    gap: 2px;
+.fav-filter{
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  align-items: center;
 }
 .filter-button {
-    background-color: #222;
+    background-color: #fff;
+    color: #222;
+    border-style: solid;
+    border-color: #222;
+    border-width: 1px;
     width: fit-content;
     min-width: 45px;
+    min-height: 40px;
+    display: flex;
     padding: 0 8px;
+    align-items: center;
     border-radius: 8px;
     text-align: center;
-    color: white;
     border: none;
     cursor: pointer;
     transition: background-color 0.2s ease;
   }
-
-  .vertical-line{
-    margin: 0 9px;
-    width: 1px;
+  .filter-button:hover{
+    background-color: #444;
+    color: #fff;
+  }
+  .active{
     background-color: #222;
+    color: #fff;
+  }
+  .all{
+    display: inline;
+  }
+  .vertical-separator{
+    width: 1px;
+    height: 30px;
+    background-color: #222;
+    margin: 0 10px;
+  }
+  .filter-button-span{
+    padding-left: 8px;
+  }
+  .thumbsUp {
+    padding-bottom: 3px;
   }
 
-  .select-dropdown {
-    position: relative;
-  }
-  
-  .arrow {
-    margin-left: 8px;
-    transition: transform 0.2s ease;
-  }
-  
-  .arrow-up {
-    transform: rotate(180deg);
-  }
-  /* imp */
-  .dropdown-menu {
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 0;
-    width: 100%;
-    background-color: #222222;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    z-index: 10;
-    max-height: 320px;
-    overflow-y: auto;
-  }
-  
-  .dropdown-item {
-    width: 100%;
-    padding: 8px 16px;
-    text-align: left;
-    color: white;
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #424242;
-  }
-  .select-button {
-    height: 36px;
-    background-color: #222222;
-    color: white;
-    padding: 0 16px;
-    border-radius: 8px;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-width: 80px;
-    cursor: pointer;
-  }
-
-  .dropdown-menu::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  .dropdown-menu::-webkit-scrollbar-track {
-    background: #2a2a2a;
-    border-radius: 4px;
-  }
-  
-  .dropdown-menu::-webkit-scrollbar-thumb {
-    background: #444444;
-    border-radius: 4px;
-  }
-  
-  .dropdown-menu::-webkit-scrollbar-thumb:hover {
-    background: #424242;
-  }
-  

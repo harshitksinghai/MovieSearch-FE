@@ -6,19 +6,27 @@
         "typeMovies": "Movies",
         "typeSeries": "Series",
         "typeGames": "Games",
-        "Year": "Year"
+        "Year": "Year",
+        "none": "None"
     },
     "error":{
         "titleError": "Title must be at least 3 characters long.",
         "NoMoviesFound": "No results found!",
-        "fetchFailed": "Failed to fetch movies!"
+        "fetchFailed": "Failed to load movies. Please try again later.",
+        "fillSearch": "Enter a title, year or type to search",
+        "somethingWentWrong": "Something went wrong"
     },
     "card":{
         "dislikeTooltip": "Not for me",
-        "likeTooptip": "I like this",
+        "likeTooltip": "I like this",
         "loveTooltip": "Love this!",
         "addListTooltip": "Add to My List",
         "removeListTooltip": "Remove from My List"
+    },
+    "fav":{
+        "myList": "MY LIST",
+        "loading": "Loading your favorites...",
+        "empty": "No items found in your list."
     }
 
 }

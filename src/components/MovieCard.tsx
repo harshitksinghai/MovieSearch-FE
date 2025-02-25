@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './MovieCard.css';
 import placeholder from "../assets/placeholder1.jpg";
 import { FaRegThumbsUp, FaThumbsUp, FaRegThumbsDown, FaThumbsDown, FaRegHeart, FaHeart, FaPlus, FaCheck } from "react-icons/fa6";
-import { removeFromList, addToList, updateRating, getMovieList } from '../utils/storage';
+import { removeFromList, addToList, updateRating, getMovieList } from '../utils/localStorage';
 import { useTranslation } from 'react-i18next'
 
 interface MovieCardProps {
@@ -36,7 +36,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
     if (isAddedToList) {
       removeFromList(movie.imdbID);
     } else {
-      addToList(movie.imdbID);
+      addToList(movie.imdbID, ratingState, movie.Type);
     }
     setIsAddedToList(!isAddedToList);
   };
@@ -76,7 +76,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               <FaThumbsDown size={14} /> : 
               <FaRegThumbsDown size={14} color="white" />
             }
-              <span className="tooltip">{t('card.dislikeTooptip')}</span>
+              <span className="tooltip">{t('card.dislikeTooltip')}</span>
             </button>
             <button
             className={`action-button ${ratingState === 'like' ? 'active' : ''}`}
@@ -86,7 +86,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               <FaThumbsUp size={14} /> : 
               <FaRegThumbsUp size={14} color="white" />
             }
-            <span className="tooltip">{t('card.likeTooptip')}</span>
+            <span className="tooltip">{t('card.likeTooltip')}</span>
           </button>
             <button
               className={`action-button ${ratingState === 'love' ? 'active' : ''}`}
@@ -96,7 +96,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
               <FaHeart size={14} /> : 
               <FaRegHeart size={14} color="white" />
             }
-              <span className="tooltip">{t('card.loveTooptip')}</span>
+              <span className="tooltip">{t('card.loveTooltip')}</span>
             </button>
           </div>
         </div>
@@ -109,7 +109,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             <FaCheck size={14} /> : 
             <FaPlus size={14} color="white" />
           }
-          <span className="tooltip">{isAddedToList ? {t('card.removeListTooltip')} : {t('card.addListTooltip')}}</span>
+          <span className="tooltip">{isAddedToList ? t('card.removeListTooltip') : t('card.addListTooltip')}</span>
         </button>
 
         <div className="movie-info">

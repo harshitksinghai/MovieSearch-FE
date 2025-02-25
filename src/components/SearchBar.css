@@ -118,7 +118,7 @@
   background: #424242;
 }
 
-.search-error {
+.search-err {
   font-size: 13px;
   margin-left: 7px;
   color: red;
@@ -128,7 +128,7 @@
   width: 100%;
   text-align: left;
 }
-.search-box-error{
+.search-box-err{
   border-width: 2px;
   border-style: solid;
   border-color: rgb(247, 87, 87);

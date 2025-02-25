@@ -4,6 +4,8 @@ import Navbar from "../components/Navbar"
 import SearchResults from "../components/SearchResults";
 import HomeList from "../components/HomeList";
 import { fetchMovies } from "../api/api";
+import {useTranslation} from 'react-i18next';
+
 
 const HomePage = () => {
 
@@ -14,6 +16,9 @@ const HomePage = () => {
     const [totalPages, setTotalPages] = useState<number>(1);
     const [searchParams, setSearchParams] = useState<any>({ query: "", year: "", type: "" });
     const [searchState, setSearchState] = useState<boolean>(false);
+
+    const {t} = useTranslation();
+
 
     useEffect(() => {
         fetchHomeMovieList();
@@ -30,8 +35,8 @@ const HomePage = () => {
     const fetchHomeMovieList = async () => {
         setLoading(true);
         try {
-            const moviesResult = await fetchMovies("", "", "movie");
-            const seriesResult = await fetchMovies("", "", "series");
+            const moviesResult = await fetchMovies(t, "", "", "movie");
+            const seriesResult = await fetchMovies(t, "", "", "series");
 
             const combinedMovies = [
                 ...(moviesResult.movies || []),
@@ -42,7 +47,7 @@ const HomePage = () => {
             setError(null);
         } catch (err) {
             console.error('Error fetching home movie list:', err);
-            setError("Failed to fetch home movie list.");
+            setError(t('error.fetchFailed'));
             setMovies([]);
         } finally {
             setLoading(false);
@@ -51,7 +56,7 @@ const HomePage = () => {
 
     const fetchMovieResults = async (query: string, year: string, type: string, currentPage: number = 1) => {
         if (!query && !year && !type) {
-            setError("Enter a title, year or type to search");
+            setError(t('error.fillSearch'));
             setMovies([]);
             setSearchState(false);
             return;
@@ -61,13 +66,13 @@ const HomePage = () => {
         setError(null);
 
         try {
-            const result = await fetchMovies(query, year, type, currentPage);
+            const result = await fetchMovies(t, query, year, type, currentPage);
             setMovies(result.movies || []);
             setTotalPages(result.totalPages);
             setError(result.error);
         } catch (err) {
             console.error('Search Error:', err);
-            setError("Something went wrong");
+            setError(t('error.somethingWentWrong'));
             setMovies([]);
             setTotalPages(1);
         } finally {
@@ -96,10 +101,10 @@ const HomePage = () => {
 
     return (
         <div>
-            <Navbar onSearch={handleSearch} />
-            {/* {!searchState && (
+            <Navbar onSearch={handleSearch} error={error}/>
+            {!searchState && (
                 <HomeList />
-            )} */}
+            )}
             {searchState && (
                 <SearchResults
                     movies={movies}

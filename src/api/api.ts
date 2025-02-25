@@ -1,10 +1,8 @@
 import axios from "axios";
-import {useTranslation} from 'react-i18next';
 
 
 const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 const API_URL = import.meta.env.VITE_OMDB_API_URL;
-
 
 
 const POPULAR_MOVIES = [
@@ -17,8 +15,7 @@ const POPULAR_SERIES = [
     "The Mandalorian", "Friends", "The Office", "Better Call Saul"
 ];
 
-export const fetchMovies = async (query?: string, year?: string, type?: string, page: number = 1) => {
-    const {t} = useTranslation();
+export const fetchMovies = async (t: (key: string) => string, query?: string, year?: string, type?: string, page: number = 1) => {
     console.log('Fetching with params:', { query, year, type, page });
 
     if (query) {
@@ -42,14 +39,14 @@ export const fetchMovies = async (query?: string, year?: string, type?: string, 
             return { 
                 movies: [], 
                 totalPages: 1, 
-                error: response.data.Error || "{t('error.NoMoviesFound')} "
+                error: t('error.NoMoviesFound')
             };
         } catch (error: any) {
             console.error('API Error:', error);
             return { 
                 movies: [], 
                 totalPages: 1, 
-                error: error.message || "Failed to fetch movies" 
+                error: t('error.NoMoviesFound')
             };
         }
     }
@@ -82,20 +79,20 @@ export const fetchMovies = async (query?: string, year?: string, type?: string, 
             return {
                 movies: [],
                 totalPages: 1,
-                error: error.message || "Failed to fetch movies"
+                error: t('error.fetchFailed')
             };
         }
     }
 };
 
-export const fetchMoviesByImdbId = async (imdbId: string) => {
-    if(imdbId){
+export const fetchMoviesByImdbId = async (t: (key: string) => string, imdbID: string) => {
+    if(imdbID){
         try {
-            let url: string = `${API_URL}?apikey=${API_KEY}&i=${encodeURIComponent(imdbId)}&plot=full`;
+            let url: string = `${API_URL}?apikey=${API_KEY}&i=${encodeURIComponent(imdbID)}&plot=full`;
 
-            console.log('Request URL:', url);
+            console.log('imdbid Request URL:', url);
             const response = await axios.get(url);
-            console.log('API Response:', response);
+            console.log('imdbid API Response:', response);
 
             if (response.data.Response === "True") {
                 return {
@@ -106,13 +103,13 @@ export const fetchMoviesByImdbId = async (imdbId: string) => {
             
             return { 
                 movie: null, 
-                error: response.data.Error || "No results found" 
+                error: t('error.NoMoviesFound')
             };
         } catch (error: any) {
             console.error('API Error:', error);
             return { 
                 movie: null, 
-                error: error.message || "Failed to fetch movies" 
+                error: t('error.fetchFailed')
             };
         }
     }

@@ -1,38 +1,48 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FavListFilter from './FavListFilter'
-import ShowFavList from './ShowFavList.tsx'
 import './HomeList.css'
-import { getMovieList, MovieItem } from '../utils/storage';
+import { getMovieList, MovieItem } from '../utils/localStorage.ts';
+import { useTranslation } from 'react-i18next';
+import ShowFavList from './ShowFavList.tsx';
 
 const HomeList = () => {
+  const {t} = useTranslation();
+  const [movieList, setMovieList] = useState<MovieItem[]>([]);
   const [filteredMovieList, setFilteredMovieList] = useState<MovieItem[]>([]);
+  const [activeType, setActiveType] = useState<string>("All");
+  const [activeRating, setActiveRating] = useState<string>("");
 
-  const movieList = getMovieList();
+  useEffect(() => {
+    const list = getMovieList();
+    setMovieList(list);
+    setFilteredMovieList(list); // Initially show all items
+  }, []);
 
-    const handleFilterChange = (filters: {
-      Type: string;
-      rating: string;
-      Year: string;
-      genres: string[];
-    }) => {
-      // Filter your movie list based on these criteria
-      const filteredMovieList = movieList.filter(movie => {
-        const typeMatch = filters.Type === 'all' || movie.Type === filters.Type;
-        const ratingMatch = !filters.rating || movie.ratingState === filters.rating;
-        const yearMatch = !filters.Year || movie.Year === filters.Year;
-        const genreMatch = filters.genres.length === 0 || 
-          filters.genres.some(genre => movie.genre.includes(genre));
-        
-        return typeMatch && ratingMatch && yearMatch && genreMatch;
-      });
-      
-      setFilteredMovieList(filteredMovieList);
-    };
+  const handleFilterChange = (ratingState: string, type: string) => {
+    setActiveRating(ratingState);
+    setActiveType(type);
+    
+    // Apply filters based on active type and rating
+    let filtered = movieList;
+    
+    // Filter by type
+    if (type !== "All") {
+      filtered = filtered.filter(movie => movie.Type === type);
+    }
+    
+    // Filter by rating if one is selected
+    if (ratingState) {
+      filtered = filtered.filter(movie => movie.ratingState === ratingState);
+    }
+    
+    setFilteredMovieList(filtered);
+  };
 
   return (
     <div className='home-list-container'>
+      <p className='myList'>{t('fav.myList')}</p>
       <FavListFilter onFilterChange={handleFilterChange} />
-      <ShowFavList filteredList={filteredMovieList}/>
+      <ShowFavList filteredList={filteredMovieList} />
     </div>
   )
 }

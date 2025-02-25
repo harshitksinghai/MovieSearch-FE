@@ -1,16 +1,31 @@
 {
-    "navbar":{
-        "appName": "WikiMovwefdrgtnhbjm,ies",
-        "searchPlaceholder": "Search Title...",
-        "typeAll": "All",
-        "typeMovies": "Movies",
-        "typeSeries": "Series",
-        "typeGames": "Games",
-        "Year": "Year"
+    "navbar": {
+        "appName": "WikiMovies",
+        "searchPlaceholder": "タイトルを検索...",
+        "typeAll": "すべて",
+        "typeMovies": "映画",
+        "typeSeries": "シリーズ",
+        "typeGames": "ゲーム",
+        "Year": "年",
+        "none": "なし"
     },
-    "error":{
-        "titleError": "Title must be at least 3 characters long.",
-        "NoMoviesFound": "No results found!",
-        "fetchFailed": "Failed to fetch movies!"
+    "error": {
+        "titleError": "タイトルは少なくとも3文字以上である必要があります。",
+        "NoMoviesFound": "結果が見つかりませんでした！",
+        "fetchFailed": "映画の読み込みに失敗しました。後でもう一度お試しください。",
+        "fillSearch": "タイトル、年、またはタイプを入力して検索してください",
+        "somethingWentWrong": "問題が発生しました"
+    },
+    "card": {
+        "dislikeTooltip": "興味なし",
+        "likeTooltip": "気に入った",
+        "loveTooltip": "大好き！",
+        "addListTooltip": "マイリストに追加",
+        "removeListTooltip": "マイリストから削除"
+    },
+    "fav": {
+        "myList": "マイリスト",
+        "loading": "お気に入りを読み込んでいます...",
+        "empty": "リストにアイテムがありません。"
     }
 }

@@ -6,14 +6,15 @@ import { useTranslation } from 'react-i18next'
 
 interface SearchBarProps {
     onSearch: (title: string, year: string, type: string) => void;
+    error: any;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch, error }) => {
     const {t} = useTranslation()
     const [title, setTitle] = useState('');
     const [type, setType] = useState('');
     const [year, setYear] = useState('');
-    const [error, setError] = useState('');
+    const [err, setError] = useState(error);
     const [isTypeOpen, setIsTypeOpen] = useState(false);
     const [isYearOpen, setIsYearOpen] = useState(false);
 
@@ -24,7 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
     const handleSearch = () => {
         if (title.trim().length < 3) {
-            setError({t('error.titleError')});
+            setError(t('error.titleError'));
             return;
         }
         setError('');
@@ -33,16 +34,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
     let typeOption: string;
     if(type === 'movie'){
-        typeOption = 'Movies';
+        typeOption = t('navbar.typeMovies');
     }
     else if(type === 'series'){
-        typeOption = 'Series';
+        typeOption = t('navbar.typeSeries');
     }
     else if(type === 'game'){
-        typeOption = 'Games';
+        typeOption = t('navbar.typeGames');
     }
     else{
-        typeOption = "All"
+        typeOption = t('navbar.typeAll')
     }
 
 
@@ -50,10 +51,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
         <div>
 
             <div className='search-container' >
-                <div className={`search-box ${error ? 'search-box-error' : ''} `}>
+                <div className={`search-box ${(err || error) ? 'search-box-err' : ''} `}>
                         <input
                             type="text"
-                            placeholder="Search Title..."
+                            placeholder={t('navbar.searchPlaceholder')}
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             className="search-title"
@@ -74,18 +75,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
 
                             {isTypeOpen && (
                                 <div className="dropdown-menu">
-                                    {['All', 'Movies', 'Series', 'Games'].map((option) => (
+                                    {[t('navbar.typeAll'), t('navbar.typeMovies'), t('navbar.typeSeries'), t('navbar.typeGames')].map((option) => (
                                         <button
                                             key={option}
                                             className="dropdown-item"
                                             onMouseDown={() => {
-                                                if(option === 'Movies'){
+                                                if(option === t('navbar.typeMovies')){
                                                     setType('movie');
                                                 }
-                                                else if(option === 'Series'){
+                                                else if(option === t('navbar.typeSeries')){
                                                     setType('series')
                                                 }
-                                                else if(option === 'Games'){
+                                                else if(option === t('navbar.typeGames')){
                                                     setType('game')
                                                 }
                                                 else{
@@ -106,7 +107,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                                 onBlur={() => setIsYearOpen(false)}
                                 className="select-button"
                             >
-                                {year ? year : "Year"}
+                                {year ? year : t('navbar.Year')}
                                 <span className={`arrow ${isYearOpen ? 'arrow-up' : ''}`}>
                                     ▼
                                 </span>
@@ -120,7 +121,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                                             setYear('');
                                             setIsYearOpen(false);
                                         }}
-                                    >None</button>
+                                    >{t('navbar.none')}</button>
                                     {years.map((option) => (
                                         <button
                                             key={option}
@@ -159,7 +160,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
                         </button>
                     </div>
                 </div>
-                <p className='search-error'>{error}</p>
+                <p className='search-err'>{err || error}</p>
             </div>
         </div>
     );

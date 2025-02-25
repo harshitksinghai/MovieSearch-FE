@@ -1,4 +1,10 @@
 .home-list-container{
     background-color: rgb(73, 170, 255);
-    height: 100vh;
+
+}
+.myList{
+    font-weight: 600;
+    font-size: 50px;
+    text-align: center;
+    margin-top: 20px;
 }
