@@ -4,6 +4,7 @@ import MovieCard from './MovieCard';
 import './ShowFavList.css'
 import { fetchMoviesByImdbId } from '../api/api';
 import { useTranslation } from 'react-i18next';
+import { Skeleton } from "@mui/material";
 
 interface SimplifiedMovie {
   Type: string;
@@ -77,19 +78,37 @@ const ShowFavList: React.FC<ShowFavListProps> = ({filteredList}) => {
     }
   }, [filteredList, t]); // Re-run when filteredList or t changes
 
-  if (loading) {
-    return <div className="loading">{t('fav.loading')}</div>;
-  }
+  // if (loading) {
+  //   return <div className="loading">{t('fav.loading')}</div>;
+  // }
 
   if (error) {
     return <div className="error">{error}</div>;
   }
 
-  if (filteredList.length === 0 || filteredMovies.length === 0) {
+  if (filteredList.length === 0) {
     return <div className="empty-list">{t('fav.empty')}</div>;
   }
 
   return (
+    <div>
+      
+    {loading ? (
+      <div className="skeleton-grid">
+        {[...Array(10)].map((_, index) => (
+          <Skeleton
+            key={index}
+            variant="rectangular"
+            width={250}
+            height={300}
+            sx={{
+              bgcolor: 'grey.700',
+              borderRadius: '8px'
+            }}
+          />
+        ))}
+      </div>
+    ) : (
     <div className="search-container">
       <div className="search-results-container">
         <div className="movies-grid">
@@ -99,6 +118,8 @@ const ShowFavList: React.FC<ShowFavListProps> = ({filteredList}) => {
         </div>
       </div>
     </div>
+        )}
+        </div>
   );
 };
 

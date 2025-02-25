@@ -26,7 +26,17 @@
     "fav":{
         "myList": "MY LIST",
         "loading": "Loading your favorites...",
-        "empty": "No items found in your list."
+        "empty": "No items found in your list.",
+        "filter":{
+            "typeAll": "All",
+            "typeMovies": "Movies",
+            "typeSeries": "Series",
+            "typeGames": "Games",
+            "Year": "Year",
+            "none": "None",
+            "love": "Love",
+            "like": "Like",
+            "meh": "Dislike"
+        }
     }
-
 }

@@ -1,12 +1,14 @@
 import { FaHeart, FaThumbsDown, FaThumbsUp } from 'react-icons/fa6';
 import './FavListFilter.css'
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface FavFilterProps {
     onFilterChange: (ratingState: string, Type: string) => void;
 }
 
   const FavListFilter: React.FC<FavFilterProps>  = ({ onFilterChange }) => {
+    const {t} = useTranslation();
     const [activeType, setActiveType] = useState<string>("All");
     const [activeRating, setActiveRating] = useState<string>("");
 
@@ -33,44 +35,44 @@ interface FavFilterProps {
                     className={`filter-button ${activeType === "All" ? "active" : ""}`}
                     onClick={() => updateFilters("", "All")}
                 >
-                    All
+                    {t('fav.filter.typeAll')}
                 </button>
                 <button 
                     className={`filter-button ${activeType === "Movies" ? "active" : ""}`}
                     onClick={() => updateFilters("", "movie")}
                 >
-                    Movies
+                    {t('fav.filter.typeMovies')}
                 </button>
                 <button 
                     className={`filter-button ${activeType === "Series" ? "active" : ""}`}
                     onClick={() => updateFilters("", "series")}
                 >
-                    Series
+                   {t('fav.filter.typeSeries')}
                 </button>
                 <button 
                     className={`filter-button ${activeType === "Games" ? "active" : ""}`}
                     onClick={() => updateFilters("", "game")}
                 >
-                    Games
+                    {t('fav.filter.typeGames')}
                 </button>
                 <div className="vertical-separator"></div>
                 <button 
                     className={`filter-button ${activeRating === "love" ? "active" : ""}`}
                     onClick={() => updateFilters("love", "")}
                 >
-                    Love <span className='filter-button-span'><FaHeart size={20} /></span>
+                    {t('fav.filter.love')} <span className='filter-button-span'><FaHeart size={20} /></span>
                 </button>
                 <button 
                     className={`filter-button ${activeRating === "like" ? "active" : ""}`}
                     onClick={() => updateFilters("like", "")}
                 >
-                    Like <span className='filter-button-span thumbsUp'><FaThumbsUp size={20} /></span>
+                    {t('fav.filter.like')} <span className='filter-button-span thumbsUp'><FaThumbsUp size={20} /></span>
                 </button>
                 <button 
                     className={`filter-button ${activeRating === "dislike" ? "active" : ""}`}
                     onClick={() => updateFilters("dislike", "")}
                 >
-                    Meh <span className='filter-button-span'><FaThumbsDown size={20} /></span>
+                   {t('fav.filter.meh')} <span className='filter-button-span'><FaThumbsDown size={20} /></span>
                 </button>
             </div>
         </div>

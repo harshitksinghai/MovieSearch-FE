@@ -1,6 +1,6 @@
 {
     "navbar": {
-        "appName": "WikiMovies",
+        "appName": "ウィキムービー",
         "searchPlaceholder": "タイトルを検索...",
         "typeAll": "すべて",
         "typeMovies": "映画",
@@ -10,14 +10,14 @@
         "none": "なし"
     },
     "error": {
-        "titleError": "タイトルは少なくとも3文字以上である必要があります。",
+        "titleError": "タイトルは3文字以上でなければなりません。",
         "NoMoviesFound": "結果が見つかりませんでした！",
         "fetchFailed": "映画の読み込みに失敗しました。後でもう一度お試しください。",
-        "fillSearch": "タイトル、年、またはタイプを入力して検索してください",
+        "fillSearch": "タイトル、年、または種類を入力してください",
         "somethingWentWrong": "問題が発生しました"
     },
     "card": {
-        "dislikeTooltip": "興味なし",
+        "dislikeTooltip": "好みではない",
         "likeTooltip": "気に入った",
         "loveTooltip": "大好き！",
         "addListTooltip": "マイリストに追加",
@@ -25,7 +25,18 @@
     },
     "fav": {
         "myList": "マイリスト",
-        "loading": "お気に入りを読み込んでいます...",
-        "empty": "リストにアイテムがありません。"
+        "loading": "お気に入りを読み込み中...",
+        "empty": "リストにアイテムがありません。",
+        "filter": {
+            "typeAll": "すべて",
+            "typeMovies": "映画",
+            "typeSeries": "シリーズ",
+            "typeGames": "ゲーム",
+            "Year": "年",
+            "none": "なし",
+            "love": "大好き",
+            "like": "好き",
+            "meh": "いまいち"
+        }
     }
 }

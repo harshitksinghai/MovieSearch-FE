@@ -1,6 +1,6 @@
 {
     "navbar": {
-        "appName": "WikiMovies",
+        "appName": "WikiPelículas",
         "searchPlaceholder": "Buscar título...",
         "typeAll": "Todo",
         "typeMovies": "Películas",
@@ -17,8 +17,8 @@
         "somethingWentWrong": "Algo salió mal"
     },
     "card": {
-        "dislikeTooltip": "No me interesa",
-        "likeTooltip": "Me gusta",
+        "dislikeTooltip": "No es para mí",
+        "likeTooltip": "Me gusta esto",
         "loveTooltip": "¡Me encanta!",
         "addListTooltip": "Agregar a Mi Lista",
         "removeListTooltip": "Eliminar de Mi Lista"
@@ -26,6 +26,17 @@
     "fav": {
         "myList": "MI LISTA",
         "loading": "Cargando tus favoritos...",
-        "empty": "No hay elementos en tu lista."
+        "empty": "No hay elementos en tu lista.",
+        "filter": {
+            "typeAll": "Todo",
+            "typeMovies": "Películas",
+            "typeSeries": "Series",
+            "typeGames": "Juegos",
+            "Year": "Año",
+            "none": "Ninguno",
+            "love": "Me encanta",
+            "like": "Me gusta",
+            "meh": "No me gusta"
+        }
     }
 }

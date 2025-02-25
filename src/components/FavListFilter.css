@@ -1,5 +1,4 @@
 .fav-list-filter-container{
-  background-color: blanchedalmond;
   position: relative;
   top: 0px;
 
@@ -14,8 +13,8 @@
     background-color: #fff;
     color: #222;
     border-style: solid;
-    border-color: #222;
-    border-width: 1px;
+    border-color: #444;
+    border-width: 2px;
     width: fit-content;
     min-width: 45px;
     min-height: 40px;
@@ -24,7 +23,6 @@
     align-items: center;
     border-radius: 8px;
     text-align: center;
-    border: none;
     cursor: pointer;
     transition: background-color 0.2s ease;
   }
