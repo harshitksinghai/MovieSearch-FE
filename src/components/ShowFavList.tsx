@@ -17,18 +17,15 @@ interface SimplifiedMovie {
 
 interface ShowFavListProps {
   filteredList: MovieItem[];
+  refreshList: () => void;
 }
 
-const ShowFavList: React.FC<ShowFavListProps> = ({filteredList}) => {
+const ShowFavList: React.FC<ShowFavListProps> = ({filteredList, refreshList}) => {
   const {t} = useTranslation();
   const [filteredMovies, setFilteredMovies] = useState<SimplifiedMovie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const [listUpdateTrigger, setListUpdateTrigger] = useState<number>(0);
-  
-  const handleMovieRemoved = () => {
-    setListUpdateTrigger(prev => prev + 1);
-  };
+
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -113,7 +110,7 @@ const ShowFavList: React.FC<ShowFavListProps> = ({filteredList}) => {
       <div className="search-results-container">
         <div className="movies-grid">
           {filteredMovies.map((movie) => (
-            <MovieCard key={movie.imdbID} movie={movie}/>
+            <MovieCard key={movie.imdbID} movie={movie} onListChange={refreshList}/>
           ))}
         </div>
       </div>

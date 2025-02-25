@@ -2,7 +2,7 @@ import { FaHeart, FaThumbsDown, FaThumbsUp } from 'react-icons/fa6';
 import './FavListFilter.css'
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { useTheme } from '@mui/material/styles';
 interface FavFilterProps {
     onFilterChange: (ratingState: string, Type: string) => void;
 }
@@ -11,17 +11,15 @@ interface FavFilterProps {
     const {t} = useTranslation();
     const [activeType, setActiveType] = useState<string>("All");
     const [activeRating, setActiveRating] = useState<string>("");
+    const theme = useTheme();
 
     const updateFilters = (ratingState: string, Type: string) => {
-        // Update the active type if a type button was clicked
         if (Type) {
             setActiveType(Type);
             onFilterChange(activeRating, Type);
         }
         
-        // Update the active rating if a rating button was clicked
         if (ratingState) {
-            // Toggle rating if already active
             const newRating = activeRating === ratingState ? "" : ratingState;
             setActiveRating(newRating);
             onFilterChange(newRating, activeType);
@@ -38,19 +36,19 @@ interface FavFilterProps {
                     {t('fav.filter.typeAll')}
                 </button>
                 <button 
-                    className={`filter-button ${activeType === "Movies" ? "active" : ""}`}
+                    className={`filter-button ${activeType === "movie" ? "active" : ""}`}
                     onClick={() => updateFilters("", "movie")}
                 >
                     {t('fav.filter.typeMovies')}
                 </button>
                 <button 
-                    className={`filter-button ${activeType === "Series" ? "active" : ""}`}
+                    className={`filter-button ${activeType === "series" ? "active" : ""}`}
                     onClick={() => updateFilters("", "series")}
                 >
                    {t('fav.filter.typeSeries')}
                 </button>
                 <button 
-                    className={`filter-button ${activeType === "Games" ? "active" : ""}`}
+                    className={`filter-button ${activeType === "games" ? "active" : ""}`}
                     onClick={() => updateFilters("", "game")}
                 >
                     {t('fav.filter.typeGames')}

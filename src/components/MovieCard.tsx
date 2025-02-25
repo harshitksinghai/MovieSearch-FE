@@ -4,12 +4,14 @@ import placeholder from "../assets/placeholder1.jpg";
 import { FaRegThumbsUp, FaThumbsUp, FaRegThumbsDown, FaThumbsDown, FaRegHeart, FaHeart, FaPlus, FaCheck } from "react-icons/fa6";
 import { removeFromList, addToList, updateRating, getMovieList } from '../utils/localStorage';
 import { useTranslation } from 'react-i18next'
+import { Link } from 'react-router-dom';
 
 interface MovieCardProps {
   movie: any;
+  onListChange?: () => void; // Optional callback prop
 }
 
-const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
+const MovieCard: React.FC<MovieCardProps> = ({ movie, onListChange }) => {
   const {t} = useTranslation();
   const [ratingState, setRatingState] = useState<'none' | 'dislike' | 'like' | 'love'>('none');
   const [isAddedToList, setIsAddedToList] = useState(false);
@@ -20,15 +22,30 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
     if (storedMovie) {
       setIsAddedToList(true);
       setRatingState(storedMovie.ratingState);
+    } else {
+      setIsAddedToList(false);
+      setRatingState('none');
     }
   }, [movie.imdbID]);
 
+  // Notify parent components about changes
+  const notifyChange = () => {
+    // Dispatch custom event
+    window.dispatchEvent(new CustomEvent('movieListChanged'));
+    
+    // Call callback if provided
+    if (onListChange) {
+      onListChange();
+    }
+  };
+
   const handleRating = (rating: 'dislike' | 'like' | 'love') => {
-    setRatingState(rating === ratingState ? 'none' : rating);
     const newRating = rating === ratingState ? 'none' : rating;
     setRatingState(newRating);
+    
     if (isAddedToList) {
       updateRating(movie.imdbID, newRating);
+      // notifyChange(); // Notify about rating change
     }
   };
 
@@ -39,6 +56,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
       addToList(movie.imdbID, ratingState, movie.Type);
     }
     setIsAddedToList(!isAddedToList);
+    
+    notifyChange(); // Notify about list change
   };
 
   let ratingIcon;
@@ -54,11 +73,13 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
 
   return (
     <div className="movie-card">
+      <Link to={`/movie/${movie.imdbID}`} className="movie-link">
       <img
         src={movie.Poster !== "N/A" ? movie.Poster : placeholder}
         alt={movie.Title}
         className="movie-poster"
       />
+      </Link>
       <div className="card-overlay">
         <div className="rating-container">
           <button
@@ -112,10 +133,12 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           <span className="tooltip">{isAddedToList ? t('card.removeListTooltip') : t('card.addListTooltip')}</span>
         </button>
 
+
         <div className="movie-info">
           <p>{movie.Type.toUpperCase()}</p>
           <p>{movie.Year}</p>
         </div>
+
       </div>
     </div>
   );

@@ -7,7 +7,9 @@
         "typeSeries": "Series",
         "typeGames": "Games",
         "Year": "Year",
-        "none": "None"
+        "none": "None",
+        "lightTooltip": "Switch to light mode",
+        "darkTooltip": "Switch to dark mode"
     },
     "error":{
         "titleError": "Title must be at least 3 characters long.",
@@ -38,5 +40,16 @@
             "like": "Like",
             "meh": "Dislike"
         }
+    },
+    "market":{
+        "appName": "WikiMovies",
+        "getStarted": "Get Started"
+    },
+    "movie":{
+        "plot": "Plot",
+        "director": "Director",
+        "cast": "Cast",
+        "language": "Languages",
+        "ratings": "Ratings"
     }
 }

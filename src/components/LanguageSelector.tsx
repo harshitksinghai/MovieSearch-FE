@@ -12,17 +12,23 @@ const LanguageSelector: React.FC = () => {
   ];
 
   return (
-    <FormControl size="small">
+    <FormControl size="small" >
       <Select
         value={i18n.language}
         onChange={(e) => i18n.changeLanguage(e.target.value)}
         sx={{
-          backgroundColor: 'rgba(255,255,255,0.1)',
-          color: 'black',
+          backgroundColor: '#222',
+          color: 'white',
+          borderRadius: '8px',
+          height: '36px',
+          marginTop: '2px'
         }}
       >
         {languages.map((lang) => (
-          <MenuItem key={lang.code} value={lang.code}>
+          <MenuItem key={lang.code} value={lang.code} sx={{
+            backgroundColor: '#222',
+            color: 'white',
+          }}>
             {lang.name}
           </MenuItem>
         ))}

@@ -5,18 +5,20 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import App from './App';
 import MarketingPage from './pages/MarketingPage.tsx';
 import HomePage from './pages/HomePage.tsx';
+import MovieDetails from './components/MovieDetails.tsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<MarketingPage />} />
       <Route index={true} path='/home' element={<HomePage />} />
+      <Route path="/movie/:id" element={<MovieDetails />} />
     </Route>
   )
 );
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
+  // <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>,
+  // </StrictMode>,
 )

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './SearchBar.css';
 import { useTranslation } from 'react-i18next'
+import { useTheme } from '@mui/material/styles';
 
 
 interface SearchBarProps {
@@ -11,6 +12,8 @@ interface SearchBarProps {
 
 const SearchBar: React.FC<SearchBarProps> = ({ onSearch, error }) => {
     const {t} = useTranslation()
+    const theme = useTheme();
+
     const [title, setTitle] = useState('');
     const [type, setType] = useState('');
     const [year, setYear] = useState('');
@@ -51,7 +54,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch, error }) => {
         <div>
 
             <div className='search-container' >
-                <div className={`search-box ${(err || error) ? 'search-box-err' : ''} `}>
+                <div className={`search-box ${(err || error) ? 'search-box-err' : ''} `} style={{ color: theme.palette.text.secondary }}>
                         <input
                             type="text"
                             placeholder={t('navbar.searchPlaceholder')}
